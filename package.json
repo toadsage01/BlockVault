@@ -1,0 +1,16 @@
+{
+  "name": "blockvault",
+  "version": "1.0.0",
+  "description": "<h1>Blockchain-based-File-Storage</h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "my-new-code": {
+    "key1": "value1",
+    "key2": "value2"
+  }
+}
