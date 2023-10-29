@@ -1,7 +1,7 @@
 ```
 test.file
 ```
-# GFG VIT-AP Hackathon
+# GeeksForGeeks VIT-AP Hackathon
 Track : 'Blockchain'
 
 Problem Statement : 'Blockchain Based eVault for storing legal records'
