@@ -1,9 +1,15 @@
 # import libraries
-import json
+import json # to handle JSON I/O
 from Blockchain import Blockchain
-from Block import Block
-from flask import Flask, request
+from Block import Block # to create custom 
+from flask import Flask, request # to create web server & accept inputs
 
+
+""" This will intialize 
+- flask app,
+- the blockchain instance,
+- an empty list for connection of peers
+"""
 # app object
 app = Flask(__name__)
 # blockchain object
@@ -12,6 +18,11 @@ blockchain = Blockchain()
 peers = []
 
 
+""" This function will
+- accept new document/data transaction
+- will validate required features
+- will also add it to 'pending transaction pool' post validation
+"""
 @app.route("/new_transaction", methods=["POST"])
 def new_transaction():
     file_data = request.get_json()  # get json response
@@ -23,6 +34,11 @@ def new_transaction():
     return "Success", 201
 
 
+
+""" THis will
+- return the full blockchain as JSON
+- for debugging purpose
+"""
 @app.route("/chain", methods=["GET"])
 def get_chain():
     # consensus()
@@ -35,6 +51,11 @@ def get_chain():
     return json.dumps({"length": len(chain), "chain": chain})
 
 
+
+"""
+- mine all unconfirmed transaction
+- add those into a new block and append to the chain
+"""
 @app.route("/mine", methods=["GET"])
 def mine_uncofirmed_transactions():
     result = blockchain.mine()
@@ -44,11 +65,19 @@ def mine_uncofirmed_transactions():
         return "No pending transactions to mine."
 
 
+
+"""
+- displaying list of current pending transaction
+"""
 @app.route("/pending_tx")
 def get_pending_tx():
     return json.dumps(blockchain.pending)
 
 
+"""
+- will accept a block from another peer
+- verify using hash and append to chain if it is valid
+"""
 @app.route("/add_block", methods=["POST"])
 def validate_and_add_block():
     block_data = request.get_json()
